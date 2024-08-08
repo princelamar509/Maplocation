@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Features</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+
+    <h1 class="title">Google Maps with Various Features</h1>
+    <div id="controls">
+        <input id="location-search" type="text" placeholder="Search location">
+        <button onclick="searchLocation()">Search</button>
+        <button onclick="centerOnUser()">Center on My Location</button>
+        <button onclick="toggleDrawing()">Toggle Drawing</button>
+        <button onclick="toggleStreetView()">Toggle Street View</button>
+        <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+        <textarea id="review-text" placeholder="Write a review"></textarea>
+        <button onclick="submitReview()">Submit Review</button>
+        <div id="reviews"></div>
+    </div>
+    <div id="map"></div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0pbqa7_m8A9rFQqyacmf3N9M1ZlkcMxw&libraries=drawing,visualization&callback=initMap"></script>
+    <script src="app.js"></script>
+</body>
+</html>

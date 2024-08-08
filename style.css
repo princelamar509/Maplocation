@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Map Container */
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Controls Container */
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fafafa;
+    width: 100%;
+}
+
+/* Location Search Bar */
+.location-search {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #d94615;
+    border-radius: 25px;
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Button Styling */
+#controls button {
+    margin-bottom: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #d94615;
+    color: white;
+    font-size: 16px;
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#controls button:hover {
+    background-color: #b7350d;
+}
+
+/* Textarea Styling */
+#controls textarea {
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid #8b5353;
+    border-radius: 10px;
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+    height: 100px;
+    resize: vertical;
+}
+
+/* Reviews Section */
+#reviews {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #controls {
+        padding: 10px;
+    }
+
+    #controls button {
+        width: 100%;
+    }
+
+    #controls textarea {
+        width: 100%;
+    }
+}
