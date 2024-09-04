@@ -1,76 +1,47 @@
 /* General Styles */
-body {
+body, html {
     margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f0f0f0;
 }
 
-/* Main Container */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    max-width: 1200px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Title */
-h1 {
+.title {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 20px 0;
     color: #333;
 }
 
 /* Map Container */
 #map {
-    height: 500px;
+    height: 100vh;
     width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-/* Controls Container */
+/* Controls Sidebar */
 #controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #fafafa;
-    width: 100%;
+    position: fixed; /* Make it fixed to always stay on the left */
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Location Search Bar */
-.location-search {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 2px solid #d94615;
-    border-radius: 25px;
-    width: calc(100% - 22px);
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-/* Button Styling */
 #controls button {
-    margin-bottom: 10px;
-    padding: 12px;
+    display: block;
+    width: 180px;
+    margin: 10px 0;
+    padding: 10px;
     border: none;
-    border-radius: 25px;
+    border-radius: 5px;
     background-color: #d94615;
     color: white;
     font-size: 16px;
-    width: calc(100% - 22px);
-    box-sizing: border-box;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -79,42 +50,29 @@ h1 {
     background-color: #b7350d;
 }
 
-/* Textarea Styling */
-#controls textarea {
-    margin-top: 10px;
+/* Search Input Styles */
+#location-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#location-search {
+    margin-bottom: 10px;
     padding: 10px;
-    border: 2px solid #8b5353;
-    border-radius: 10px;
-    width: calc(100% - 22px);
+    border: 2px solid #d94615;
+    border-radius: 5px;
+    width: 180px;
     box-sizing: border-box;
-    height: 100px;
-    resize: vertical;
+    font-size: 16px;
 }
 
-/* Reviews Section */
-#reviews {
-    margin-top: 20px;
+footer {
+    text-align: center;
     padding: 10px;
-    border-top: 1px solid #ccc;
+    color: black;
+    background-color: #f1f1f1;
+    position: relative;
+    bottom: 0;
     width: 100%;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
-        padding: 10px;
-    }
-
-    #controls {
-        padding: 10px;
-    }
-
-    #controls button {
-        width: 100%;
-    }
-
-    #controls textarea {
-        width: 100%;
-    }
 }

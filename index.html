@@ -3,24 +3,30 @@
 <head>
     <title>Google Maps Features</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-
-
     <h1 class="title">Google Maps with Various Features</h1>
-    <div id="controls">
-        <input id="location-search" type="text" placeholder="Search location">
-        <button onclick="searchLocation()">Search</button>
-        <button onclick="centerOnUser()">Center on My Location</button>
-        <button onclick="toggleDrawing()">Toggle Drawing</button>
-        <button onclick="toggleStreetView()">Toggle Street View</button>
-        <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-        <textarea id="review-text" placeholder="Write a review"></textarea>
-        <button onclick="submitReview()">Submit Review</button>
-        <div id="reviews"></div>
-    </div>
+
     <div id="map"></div>
+
+    <div id="controls">
+        <div id="location-info">
+            <input id="location-search" type="text" placeholder="Search location" value="San Francisco" onkeyup="searchLocation()"/>
+            <button onclick="searchLocation()">Search</button>
+            <button onclick="centerOnUser()">Center on My Location</button>
+            <button onclick="toggleDrawing()">Toggle Drawing</button>
+            <button onclick="toggleStreetView()">Toggle Street View</button>
+            <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+        </div>
+    </div>
+    <button id="back-button" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Back</button>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0pbqa7_m8A9rFQqyacmf3N9M1ZlkcMxw&libraries=drawing,visualization&callback=initMap"></script>
     <script src="app.js"></script>
+
+    <footer>
+        <p>&copy; Mr.M</p></p>
+    </footer>
 </body>
 </html>
+

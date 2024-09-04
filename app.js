@@ -1,7 +1,8 @@
 var map; // Declare map variable globally
+var heatmap; // Declare heatmap variable globally
 
 function initMap() {
-    var location = {lat: 37.7749, lng: -122.4194}; // Coordinates for San Francisco
+    var location = { lat: 37.7749, lng: -122.4194 }; // Coordinates for San Francisco
     map = new google.maps.Map(document.getElementById('map'), {
         center: location,
         zoom: 15,
@@ -18,7 +19,7 @@ function initMap() {
         content: '<h3>San Francisco</h3><p>Aerial view of San Francisco.</p>'
     });
 
-    marker.addListener('click', function() {
+    marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
 
@@ -28,63 +29,74 @@ function initMap() {
 }
 
 function searchLocation() {
-    var address = document.getElementById('location-search').value;
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'address': address }, function(results, status) {
+    const address = document.getElementById('location-search').value;
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address }, (results, status) => {
         if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
+            const marker = new google.maps.Marker({
+                map,
+                position: results[0].geometry.location,
+                title: address
             });
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
+        } 
     });
 }
 
 var locations = [
-    {lat: 37.7749, lng: -122.4194, title: 'San Francisco', info: 'Aerial view of San Francisco.'},
-    {lat: 34.0522, lng: -118.2437, title: 'Los Angeles', info: 'Aerial view of Los Angeles.'},
-    // Add more locations
+    { lat: 37.7749, lng: -122.4194, title: 'San Francisco', info: 'Aerial view of San Francisco.' },
+    { lat: 34.0522, lng: -118.2437, title: 'Los Angeles', info: 'Aerial view of Los Angeles.' },
+    // Add more locations as needed
 ];
 
 function addMarkers() {
-    locations.forEach(function(location) {
+    locations.forEach(function (location) {
         var marker = new google.maps.Marker({
-            position: {lat: location.lat, lng: location.lng},
+            position: { lat: location.lat, lng: location.lng },
             map: map,
             title: location.title
         });
 
-        var infowindow = new google.maps.InfoWindow({
-            content: '<h3>' + location.title + '</h3><p>' + location.info + '</p>'
-        });
-
-        marker.addListener('click', function() {
+    
+        marker.addListener('click', function () {
             infowindow.open(map, marker);
         });
     });
 }
-
 function centerOnUser() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            map.setCenter(userLocation);
-            var marker = new google.maps.Marker({
-                position: userLocation,
-                map: map,
-                title: 'Your Location'
-            });
-        });
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                var userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                map.setCenter(userLocation);
+            },
+            function (error) {
+                // Handle errors with a switch statement for different cases
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("User denied the request for Geolocation.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("An unknown error occurred.");
+                        break;
+                }
+            }
+        );
     } else {
+        // This will only run if the browser does not support geolocation
         alert("Geolocation is not supported by this browser.");
     }
 }
+
 
 function initDrawingManager() {
     var drawingManager = new google.maps.drawing.DrawingManager({
@@ -104,9 +116,13 @@ function initDrawingManager() {
     drawingManager.setMap(map);
 }
 
+var drawingManager; // Move this declaration outside of functions to avoid reinitialization
+
 function toggleDrawing() {
-    var drawingManager = new google.maps.drawing.DrawingManager();
-    if (drawingManager.map) {
+    if (!drawingManager) {
+        drawingManager = new google.maps.drawing.DrawingManager();
+    }
+    if (drawingManager.getMap()) {
         drawingManager.setMap(null);
     } else {
         drawingManager.setMap(map);
@@ -115,15 +131,24 @@ function toggleDrawing() {
 
 function initHeatmap() {
     var heatmapData = [
-        {location: new google.maps.LatLng(37.7749, -122.4194), weight: 3},
-        {location: new google.maps.LatLng(34.0522, -118.2437), weight: 2},
-        // Add more data points
+        { location: new google.maps.LatLng(37.7749, -122.4194), weight: 3 },
+        { location: new google.maps.LatLng(34.0522, -118.2437), weight: 2 },
+
+        // Add more data points as needed
     ];
 
-    var heatmap = new google.maps.visualization.HeatmapLayer({
+    heatmap = new google.maps.visualization.HeatmapLayer({
         data: heatmapData
     });
     heatmap.setMap(map);
+}
+
+function toggleHeatmap() {
+    if (heatmap.getMap()) {
+        heatmap.setMap(null);
+    } else {
+        heatmap.setMap(map);
+    }
 }
 
 function toggleStreetView() {
@@ -141,27 +166,5 @@ function toggleStreetView() {
             });
         map.setStreetView(panorama);
     }
-}
-
-var reviews = [];
-
-function submitReview() {
-    var reviewText = document.getElementById('review-text').value;
-    if (reviewText) {
-        reviews.push(reviewText);
-        document.getElementById('review-text').value = '';
-        displayReviews();
-    }
-}
-
-function displayReviews() {
-    var reviewsDiv = document.getElementById('reviews');
-    reviewsDiv.innerHTML = '';
-    reviews.forEach(function(review) {
-        var reviewElement = document.createElement('p');
-        reviewElement.textContent = review;
-        reviewsDiv.appendChild(reviewElement);
-
-    });
 }
 
