@@ -168,3 +168,30 @@ function toggleStreetView() {
     }
 }
 
+
+function backToDefault() {
+    map.setCenter(new google.maps.LatLng(37.7749, -122.4194));
+    map.setZoom(15);
+
+    if (drawingManager) {
+        drawingManager.setMap(null);
+    }
+    if (heatmap) {
+        heatmap.setMap(null);
+    }else{
+        heatmap.setMap(map);
+    }
+}
+
+// Get the button element
+const backButton = document.querySelector('button[onclick="backToDefault()"]');
+
+// Add an event listener to the Street View toggle event
+// Replace with your actual logic to detect when Street View is toggled
+document.addEventListener('streetViewToggled', () => {
+  // Simulate a click on the button
+  backButton.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+});
+
+
+

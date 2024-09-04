@@ -18,12 +18,13 @@
             <button onclick="toggleDrawing()">Toggle Drawing</button>
             <button onclick="toggleStreetView()">Toggle Street View</button>
             <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+
         </div>
     </div>
-    <button id="back-button" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Back</button>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0pbqa7_m8A9rFQqyacmf3N9M1ZlkcMxw&libraries=drawing,visualization&callback=initMap"></script>
-    <script src="app.js"></script>
 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0pbqa7_m8A9rFQqyacmf3N9M1ZlkcMxw&libraries=drawing,visualization&callback=initMap"></script>
+    <script src=" script.js"></script>
+    <button id="back-button" onclick="backToDefault()"><i class="fas fa-back fa-2x">Back </i></button>
     <footer>
         <p>&copy; Mr.M</p></p>
     </footer>
